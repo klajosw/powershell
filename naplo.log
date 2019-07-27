@@ -1,0 +1,289 @@
+﻿2012.07.10_08:48:51                      Indult0
+2012.07.10_08:48:52 Godot.Db             Adatbázis kapcsolat inicializálása: kecskemetil@cldb
+2012.07.10_08:48:52                      Indult_00
+2012.07.10_08:48:52                      Indult_11
+2012.07.10_08:48:52 Godot.Db             Lekérdezés indítása:
+  select /*+ use_hash(s ach tr ac ag agp prod)*/
+             s.period, 
+             ag.name fcsop_nev,
+             ac.account_number,              
+             s.dn_elad_electronic_address msisdn, 
+             s.roaming_indicator, 
+             s.call_in_out, 
+             prod.name service_name,    
+             prod.description service_desc, 
+             s.call_unit_of_measure, 
+             sum(s.call_number_of_unit) db, 
+             sum(call_actual_volume) actual_volume,
+             sum(call_rounded_volume) rounded_volume,
+             sum(s.call_net_amount) net_amount, 
+             sum(s.call_paid_net_price) paid_net_price,
+             s.coev_id , agp.acco_id,             
+             to_char(sysdate,'yyyy.mm.dd') caus_tmp1      
+          from 
+             diamond.dw_call_usage_summaries@dwhprod partition (pous201202)  s,
+             diamond.dw_account_contract_history@dwhprod ach,
+             diamond.dw_accounts@dwhprod ac,
+             diamond.dw_account_groups@dwhprod ag,
+             diamond.dw_account_group_periods@dwhprod agp,
+             diamond.dw_products@dwhprod prod
+          where 1 = 1
+             and ag.id in (4366239026)  
+             and to_char(s.dn_prod_id_initiator_service) = prod.source_id
+             and ag.id = agp.acgr_id 
+             and agp.acco_id = ac.id 
+             and add_months(to_date('201202' ,'yyyymm'),1)-1/24/60/60 between agp.date_from and nvl(agp.date_to,sysdate)
+             and add_months(to_date('201202' ,'yyyymm'),1)-1/24/60/60 between ach.date_from and nvl(ach.date_to,sysdate)
+             and ach.acco_id = ac.id
+             and s.coev_id in ach.coev_id
+             and s.fandf_flag='0'
+          group by 
+             s.period, 
+             ag.name, 
+             ac.account_number, 
+			 s.coev_id , agp.acco_id,
+             s.dn_elad_electronic_address,
+             s.roaming_indicator, 
+             s.call_in_out, 
+             s.call_unit_of_measure, 
+             prod.name, 
+             prod.description,
+             to_char(sysdate,'yyyy.mm.dd')
+2012.07.10_08:48:55 Godot.Db             Kapcsolódás sikeres: kecskemetil@cldb
+2012.07.10_08:48:55 Godot.Db             A lekérdezés sikertelen: ORA-14100: partition extended table name cannot refer to a remote object
+
+2012.07.10_08:48:55 Godot.Results        Üres eredményhalmaz létrehozva
+2012.07.10_08:48:55                      Figyi, nincs eredmény a tömbbe !!!
+2012.07.10_08:48:56                      Vég_11
+2012.07.10_08:48:56                      Indult_12
+2012.07.10_08:48:56 Godot.Db             Lekérdezés indítása:
+  select /*+ use_hash(s ach tr ac ag agp prod)*/
+             s.period, 
+             ag.name fcsop_nev,
+             ac.account_number,              
+             s.dn_elad_electronic_address msisdn, 
+             s.roaming_indicator, 
+             s.call_in_out, 
+             prod.name service_name,    
+             prod.description service_desc, 
+             s.call_unit_of_measure, 
+             sum(s.call_number_of_unit) db, 
+             sum(call_actual_volume) actual_volume,
+             sum(call_rounded_volume) rounded_volume,
+             sum(s.call_net_amount) net_amount, 
+             sum(s.call_paid_net_price) paid_net_price,
+             s.coev_id , agp.acco_id,             
+             to_char(sysdate,'yyyy.mm.dd') caus_tmp1      
+          from 
+             diamond.dw_call_usage_summaries@dwhprod partition (pous201203) s,
+             diamond.dw_account_contract_history@dwhprod ach,
+             diamond.dw_accounts@dwhprod ac,
+             diamond.dw_account_groups@dwhprod ag,
+             diamond.dw_account_group_periods@dwhprod agp,
+             diamond.dw_products@dwhprod prod
+          where 1 = 1
+             and ag.id in (4366239026)  
+             and to_char(s.dn_prod_id_initiator_service) = prod.source_id
+             and ag.id = agp.acgr_id 
+             and agp.acco_id = ac.id 
+             and add_months(to_date('201203' ,'yyyymm'),1)-1/24/60/60 between agp.date_from and nvl(agp.date_to,sysdate)
+             and add_months(to_date('201203' ,'yyyymm'),1)-1/24/60/60 between ach.date_from and nvl(ach.date_to,sysdate)
+             and ach.acco_id = ac.id
+             and s.coev_id in ach.coev_id
+             and s.fandf_flag='0'
+          group by 
+             s.period, 
+             ag.name, 
+             ac.account_number, 
+			 s.coev_id , agp.acco_id,
+             s.dn_elad_electronic_address,
+             s.roaming_indicator, 
+             s.call_in_out, 
+             s.call_unit_of_measure, 
+             prod.name, 
+             prod.description,
+             to_char(sysdate,'yyyy.mm.dd')
+2012.07.10_08:48:56 Godot.Db             A lekérdezés sikertelen: ORA-14100: partition extended table name cannot refer to a remote object
+
+2012.07.10_08:48:56 Godot.Results        Üres eredményhalmaz létrehozva
+2012.07.10_08:48:56                      Figyi, nincs eredmény a tömbbe !!!
+2012.07.10_08:48:56                      Vég_12
+2012.07.10_08:48:56                      Indult_13
+2012.07.10_08:48:56 Godot.Db             Lekérdezés indítása:
+  select /*+ use_hash(s ach tr ac ag agp prod)*/
+             s.period, 
+             ag.name fcsop_nev,
+             ac.account_number,              
+             s.dn_elad_electronic_address msisdn, 
+             s.roaming_indicator, 
+             s.call_in_out, 
+             prod.name service_name,    
+             prod.description service_desc, 
+             s.call_unit_of_measure, 
+             sum(s.call_number_of_unit) db, 
+             sum(call_actual_volume) actual_volume,
+             sum(call_rounded_volume) rounded_volume,
+             sum(s.call_net_amount) net_amount, 
+             sum(s.call_paid_net_price) paid_net_price,
+             s.coev_id , agp.acco_id,             
+             to_char(sysdate,'yyyy.mm.dd') caus_tmp1      
+          from 
+             diamond.dw_call_usage_summaries@dwhprod partition (pous201204) s,
+             diamond.dw_account_contract_history@dwhprod ach,
+             diamond.dw_accounts@dwhprod ac,
+             diamond.dw_account_groups@dwhprod ag,
+             diamond.dw_account_group_periods@dwhprod agp,
+             diamond.dw_products@dwhprod prod
+          where 1 = 1
+             and ag.id in (4366239026)  
+             and to_char(s.dn_prod_id_initiator_service) = prod.source_id
+             and ag.id = agp.acgr_id 
+             and agp.acco_id = ac.id 
+             and add_months(to_date('201204' ,'yyyymm'),1)-1/24/60/60 between agp.date_from and nvl(agp.date_to,sysdate)
+             and add_months(to_date('201204' ,'yyyymm'),1)-1/24/60/60 between ach.date_from and nvl(ach.date_to,sysdate)
+             and ach.acco_id = ac.id
+             and s.coev_id in ach.coev_id
+             and s.fandf_flag='0'
+          group by 
+             s.period, 
+             ag.name, 
+             ac.account_number, 
+			 s.coev_id , agp.acco_id,
+             s.dn_elad_electronic_address,
+             s.roaming_indicator, 
+             s.call_in_out, 
+             s.call_unit_of_measure, 
+             prod.name, 
+             prod.description,
+             to_char(sysdate,'yyyy.mm.dd')
+2012.07.10_08:48:56 Godot.Db             A lekérdezés sikertelen: ORA-14100: partition extended table name cannot refer to a remote object
+
+2012.07.10_08:48:56 Godot.Results        Üres eredményhalmaz létrehozva
+2012.07.10_08:48:56                      Figyi, nincs eredmény a tömbbe !!!
+2012.07.10_08:48:56                      Vég_13
+2012.07.10_08:48:56                      Indult_14
+2012.07.10_08:48:56 Godot.Db             Lekérdezés indítása:
+  select /*+ use_hash(s ach tr ac ag agp prod)*/
+             s.period, 
+             ag.name fcsop_nev,
+             ac.account_number,              
+             s.dn_elad_electronic_address msisdn, 
+             s.roaming_indicator, 
+             s.call_in_out, 
+             prod.name service_name,    
+             prod.description service_desc, 
+             s.call_unit_of_measure, 
+             sum(s.call_number_of_unit) db, 
+             sum(call_actual_volume) actual_volume,
+             sum(call_rounded_volume) rounded_volume,
+             sum(s.call_net_amount) net_amount, 
+             sum(s.call_paid_net_price) paid_net_price,
+             s.coev_id , agp.acco_id,             
+             to_char(sysdate,'yyyy.mm.dd') caus_tmp1      
+          from 
+             diamond.dw_call_usage_summaries@dwhprod partition (pous201205) s,
+             diamond.dw_account_contract_history@dwhprod ach,
+             diamond.dw_accounts@dwhprod ac,
+             diamond.dw_account_groups@dwhprod ag,
+             diamond.dw_account_group_periods@dwhprod agp,
+             diamond.dw_products@dwhprod prod
+          where 1 = 1
+             and ag.id in (4366239026)  
+             and to_char(s.dn_prod_id_initiator_service) = prod.source_id
+             and ag.id = agp.acgr_id 
+             and agp.acco_id = ac.id 
+             and add_months(to_date('201205' ,'yyyymm'),1)-1/24/60/60 between agp.date_from and nvl(agp.date_to,sysdate)
+             and add_months(to_date('201205' ,'yyyymm'),1)-1/24/60/60 between ach.date_from and nvl(ach.date_to,sysdate)
+             and ach.acco_id = ac.id
+             and s.coev_id in ach.coev_id
+             and s.fandf_flag='0'
+          group by 
+             s.period, 
+             ag.name, 
+             ac.account_number, 
+			 s.coev_id , agp.acco_id,
+             s.dn_elad_electronic_address,
+             s.roaming_indicator, 
+             s.call_in_out, 
+             s.call_unit_of_measure, 
+             prod.name, 
+             prod.description,
+             to_char(sysdate,'yyyy.mm.dd')
+2012.07.10_08:48:56 Godot.Db             A lekérdezés sikertelen: ORA-14100: partition extended table name cannot refer to a remote object
+
+2012.07.10_08:48:56 Godot.Results        Üres eredményhalmaz létrehozva
+2012.07.10_08:48:56                      Figyi, nincs eredmény a tömbbe !!!
+2012.07.10_08:48:56                      Vég_14
+2012.07.10_08:48:56 Godot.Excel          Új Excel-munkafüzet létrehozása
+2012.07.10_08:48:56 Godot.Excel          Excel-munkafüzet generálása új AppDomain alatt
+2012.07.10_08:48:58 Godot.Excel          Eredményhalmaz felszabadítása: 201202
+2012.07.10_08:48:58 Godot.Results        Eredménytömb felszabadítása
+2012.07.10_08:48:58 Godot.Excel          Eredményhalmaz felszabadítása: 201203
+2012.07.10_08:48:58 Godot.Results        Eredménytömb felszabadítása
+2012.07.10_08:48:58 Godot.Excel          Eredményhalmaz felszabadítása: 201204
+2012.07.10_08:48:58 Godot.Results        Eredménytömb felszabadítása
+2012.07.10_08:48:58 Godot.Excel          Eredményhalmaz felszabadítása: 201205
+2012.07.10_08:48:58 Godot.Results        Eredménytömb felszabadítása
+2012.07.10_08:48:58 Godot.Excel          Az Excel-munkafüzet mentése sikeres volt: KLkesz.xlsx
+2012.07.10_08:48:58 Godot.Mail           Üzenet küldése (Feladó: kecskemeti.lajos@telekom.hu, Címzett: kecskemeti.lajos@kfkizrt.hu, CC: , BCC: , Tárgy: TAM heti riport)
+2012.07.10_08:48:58 Godot.Mail           Üzenettörzs mérete: 30 bájt
+2012.07.10_08:48:58 Godot.Mail           Fájl csatolása üzenethez: KLkesz.xlsx
+2012.07.10_08:48:58 Godot.Mail           Az üzenet küldése sikertelen: Failure sending mail.
+2012.07.10_08:48:58                      Levél ment
+2012.07.10_08:48:58 Godot.Db             Kapcsolat bontása: kecskemetil@cldb
+2012.07.10_08:48:58 Godot.Results        Eredménytömb felszabadítása
+2012.07.10_08:48:58 Godot.Log            Naplózás befejeződik
+2012.07.10_08:51:58                      Indult0
+2012.07.10_08:51:58 Godot.Db             Adatbázis kapcsolat inicializálása: kecskemetil@dwhprod
+2012.07.10_08:51:58                      Indult_00
+2012.07.10_08:51:58                      Indult_11
+2012.07.10_08:51:58 Godot.Db             Lekérdezés indítása:
+  select /*+ use_hash(s ach tr ac ag agp prod)*/
+             s.period, 
+             ag.name fcsop_nev,
+             ac.account_number,              
+             s.dn_elad_electronic_address msisdn, 
+             s.roaming_indicator, 
+             s.call_in_out, 
+             prod.name service_name,    
+             prod.description service_desc, 
+             s.call_unit_of_measure, 
+             sum(s.call_number_of_unit) db, 
+             sum(call_actual_volume) actual_volume,
+             sum(call_rounded_volume) rounded_volume,
+             sum(s.call_net_amount) net_amount, 
+             sum(s.call_paid_net_price) paid_net_price,
+             s.coev_id , agp.acco_id,             
+             to_char(sysdate,'yyyy.mm.dd') caus_tmp1      
+          from 
+             diamond.dw_call_usage_summaries@dwhprod partition (pous201202)  s,
+             diamond.dw_account_contract_history@dwhprod ach,
+             diamond.dw_accounts@dwhprod ac,
+             diamond.dw_account_groups@dwhprod ag,
+             diamond.dw_account_group_periods@dwhprod agp,
+             diamond.dw_products@dwhprod prod
+          where 1 = 1
+             and ag.id in (4366239026)  
+             and to_char(s.dn_prod_id_initiator_service) = prod.source_id
+             and ag.id = agp.acgr_id 
+             and agp.acco_id = ac.id 
+             and add_months(to_date('201202' ,'yyyymm'),1)-1/24/60/60 between agp.date_from and nvl(agp.date_to,sysdate)
+             and add_months(to_date('201202' ,'yyyymm'),1)-1/24/60/60 between ach.date_from and nvl(ach.date_to,sysdate)
+             and ach.acco_id = ac.id
+             and s.coev_id in ach.coev_id
+             and s.fandf_flag='0'
+          group by 
+             s.period, 
+             ag.name, 
+             ac.account_number, 
+			 s.coev_id , agp.acco_id,
+             s.dn_elad_electronic_address,
+             s.roaming_indicator, 
+             s.call_in_out, 
+             s.call_unit_of_measure, 
+             prod.name, 
+             prod.description,
+             to_char(sysdate,'yyyy.mm.dd')
+2012.07.10_08:51:59 Godot.Db             Kapcsolódás sikeres: kecskemetil@dwhprod
+2012.07.10_08:51:59 Godot.Db             Lekérdezett oszlopok száma: 17
+2012.07.10_08:51:59 Godot.Db             Oszlopnevek: PERIOD FCSOP_NEV ACCOUNT_NUMBER MSISDN ROAMING_INDICATOR CALL_IN_OUT SERVICE_NAME SERVICE_DESC CALL_UNIT_OF_MEASURE DB ACTUAL_VOLUME ROUNDED_VOLUME NET_AMOUNT PAID_NET_PRICE COEV_ID ACCO_ID CAUS_TMP1
